@@ -1,0 +1,3 @@
+[submodule "rental-wifi-payment-gateway"]
+	path = rental-wifi-payment-gateway
+	url = git@github.com:danieldaf/rental-wifi-payment-gateway.git
