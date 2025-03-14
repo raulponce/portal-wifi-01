@@ -1,0 +1,59 @@
+Referencia:
+    https://github.com/mbentley/docker-omada-controller
+
+docker build \
+  --build-arg INSTALL_VER="5.15.8.2" \
+  --build-arg ARCH="amd64" \
+  -f Dockerfile.v5.x \
+  -t auster/omada-controller:5.15-amd64 .
+
+docker tag auster/omada-controller:5.15-amd64 auster/omada-controller:5.15
+
+docker compose up -d
+
+https://localhost:8843
+http://localhost:8088
+
+--
+hostpot vaucher throubles, consider alternatives:
+    https://github.com/smartheim/wifi-captive-rs
+
+--
+curl 'https://localhost:8043/8e0a495a03d49a0eb5902f280543f234/api/v2/hotspot/sites/67d35d63d027e07221f0745b/voucherGroups' 
+    -X POST 
+    -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:136.0) Gecko/20100101 Firefox/136.0' 
+    -H 'Accept: application/json, text/javascript, */*; q=0.01' 
+    -H 'Accept-Language: es-ES,es;q=0.8,en-US;q=0.5,en;q=0.3' 
+    -H 'Accept-Encoding: gzip, deflate, br, zstd' 
+    -H 'Referer: https://localhost:8043/8e0a495a03d49a0eb5902f280543f234/login' 
+    -H 'Content-Type: application/json; charset=UTF-8' 
+    -H 'X-Requested-With: XMLHttpRequest' 
+    -H 'Csrf-Token: e452bb587adf4abebae191a50bfddebb' 
+    -H 'Origin: https://localhost:8043' 
+    -H 'Sec-GPC: 1' 
+    -H 'Connection: keep-alive' 
+    -H 'Cookie: TPOMADA_SESSIONID=iam-187a5c19d264450687ed550ec3a7f463' 
+    -H 'Sec-Fetch-Dest: empty' 
+    -H 'Sec-Fetch-Mode: cors' 
+    -H 'Sec-Fetch-Site: same-origin' 
+    -H 'Priority: u=0' --data-raw '{"codeLength":6,"codeForm":[0],"amount":2,"name":"dev5","type":0,"logout":true,"rateLimitId":"67d35e2ed027e07221f074a6","trafficLimitEnable":false,"trafficLimit":null,"voucherValidityEnable":false,"upTimeLimitEnable":false,"durationType":1,"duration":5,"description":null,"maxUsers":1,"portalIds":["67d36581d027e07221f074dd"],"applyToAllPortals":false,"printComments":null}'
+
+--
+https://www.tp-link.com/en/support/faq/3231/
+https://use1-omada-northbound.tplinkcloud.com/doc.html#/home
+
+https://use1-omada-northbound.tplinkcloud.com/doc.html#/home
+
+https://use1-omada-northbound.tplinkcloud.com/doc.html#/06%20Hotspot/Voucher/createVoucherGroup
+https://use1-omada-northbound.tplinkcloud.com/doc.html#/06%20Hotspot/Voucher/getVoucher
+https://use1-omada-northbound.tplinkcloud.com/doc.html#/06%20Hotspot/Voucher/clearInvalidVouchersInaGroup
+https://use1-omada-northbound.tplinkcloud.com/doc.html#/06%20Hotspot/Voucher/printVoucherGroup
+
+--
+docker build \
+  --build-arg INSTALL_VER="5.14.32.4" \
+  --build-arg ARCH="amd64" \
+  -f Dockerfile.v5.x \
+  -t auster/omada-controller:5.14-amd64 .
+
+docker tag auster/omada-controller:5.14-amd64 auster/omada-controller:5.14
