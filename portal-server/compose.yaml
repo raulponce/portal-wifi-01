@@ -1,0 +1,10 @@
+services:
+  mariadb:
+    image: 'mariadb:11.4'
+    environment:
+      - 'MARIADB_DATABASE=wifi-portal'
+      - 'MARIADB_PASSWORD=auster123'
+      - 'MARIADB_ROOT_PASSWORD=auster$321'
+      - 'MARIADB_USER=auster'
+    ports:
+      - '3306'
