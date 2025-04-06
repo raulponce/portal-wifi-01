@@ -6,6 +6,8 @@ WORKDIR /home/node/workspace
 
 RUN npm install -g @angular/cli@19.2.5
 
-RUN apt-get update --fix-missing && apt-get install -y git curl vim
+RUN npm install -g bun
+
+RUN apt-get update --fix-missing && apt-get install -y git curl vim telnet
 
 USER node

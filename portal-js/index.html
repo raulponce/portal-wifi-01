@@ -1,0 +1,45 @@
+<html>
+  <head><title>Auster External Portal</title></head>
+  <body>
+    <center>
+      <h1>Auster External Portal</h1>
+      </br>
+      <button onclick="redirect()">Ingresar</button>
+    </center>
+  </body>
+
+  <script>
+    const queryParams = new Proxy(new URLSearchParams(window.location.search), {
+      get: (searchParams, prop) => searchParams.get(prop),
+    });
+
+    function validateURL() {
+// ?clientMac=B4-6B-FC-D2-7C-5B
+// &clientIp=192.168.1.16
+// &t=1742766560
+// &site=67d41b41fa1be0473141c355
+// &redirectUrl=http%3A%2F%2Fwww-msftconnecttest.com%2Fredirect
+// &apMac=50-91-E3-FF-6F-E2
+// &ssidName=auster_wifi
+// &radioId=0
+      return {
+        clientMac: queryParams.clientMac,
+        clientIp: queryParams.clientIp,
+        t: queryParams.t,
+        site: queryParams.site,
+        redirectUrl: queryParams.redirectUrl,
+        apMac: queryParams.apMac,
+        ssidName: queryParams.ssidName,
+        radioId: queryParams.radioId
+      }
+    }
+
+    qparams = validateURL();
+    console.log(JSON.stringify(qparams));
+
+    function redirect() {
+      window.location.replace("https://stackoverflow.com");
+    }
+
+  </script>
+</html>
