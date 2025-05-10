@@ -1,1 +1,21 @@
-<router-outlet />
+<!-- Loading spinner -->
+<div *ngIf="loading" class="loading-container">
+  <span class="spLoading"></span>
+  <mat-progress-spinner
+    class="spinner"
+    color="primary"
+    mode="indeterminate"
+    diameter="300">
+  </mat-progress-spinner>
+  <span class="spLoading"></span>
+</div>
+
+<!-- the application -->
+<div class="site-container">
+  <!-- div class="site-header">
+    <app-header></app-header>
+  </div-->
+  <div class="site-content">
+    <router-outlet />
+  </div>
+</div>

@@ -1,1 +1,34 @@
-<p>buy works!</p>
+<div class="titleHeader">WIFI Rental</div>
+
+<div class="cards-container">
+  <div class="{{getClassByType(card)}}">
+    <p>
+      <img *ngIf="card.voucher.price.currency == 'FREE'" src="free02.png" alt="Free">
+      <img *ngIf="card.voucher.type == 'BY_TIME' && card.voucher.price.currency != 'FREE'" src="time02.png" alt="ByTime">
+      <img *ngIf="card.voucher.type == 'BY_DATA' && card.voucher.price.currency != 'FREE'" src="data02.png" alt="ByData">
+    </p>
+    <h3 class="cardTitle">{{card.voucher.name}}</h3>
+    <p>{{ getCost(card.voucher) }}</p>
+  </div>
+</div>
+
+
+<div class="titleButton">
+    <span class="space"></span>
+    <button mat-raised-button class="acionButton" (click)="onCancel()">Cancel</button>
+    <button mat-raised-button class="acionButton" (click)="onConfirm()">Confirm</button>
+    <span class="space"></span>
+</div>
+
+<!-- <table class="tPrice">
+    <tbody>
+        <tr>
+            <td class="pLeft">
+                <button mat-button>Cancel</button>
+            </td>
+            <td class="pRight">
+                <button mat-button>Confirm</button>
+            </td>
+        </tr>
+    </tbody>
+</table> -->

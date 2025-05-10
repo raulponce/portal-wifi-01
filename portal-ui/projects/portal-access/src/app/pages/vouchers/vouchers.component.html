@@ -1,32 +1,72 @@
-<p>External WIFI Portal</p>
-<!-- <p><strong>clientMac:</strong>{{inputData.clientMac}}</p>
-<p><strong>clientIp:</strong>{{inputData.clientIp}}</p>
-<p><strong>apMac:</strong>{{inputData.apMac}}</p>
-<p><strong>site:</strong>{{inputData.site}}</p>
-<p><strong>ssidName:</strong>{{inputData.ssidName}}</p>
-<p><strong>t:</strong>{{inputData.t}}</p>
-<p><strong>redirectUrl:</strong>{{inputData.redirectUrl}}</p>
-<p><strong>radioId:</strong>{{inputData.radioId}}</p>
-<br/> -->
-
-<mat-toolbar color="primary"> Responsive Card Grid </mat-toolbar>
+<!-- <mat-toolbar color="primary"> Buy Internet Access </mat-toolbar>
 <div class="container responsive-grid">
     <mat-card *ngFor="let card of voucherCards()">
-        <mat-card-header>
-          <mat-card-title>{{ card.voucher.vuid }} - {{ card.voucher.type }} </mat-card-title>
+        <mat-card-header class="cardTitleHeader">
+          <mat-card-title class="cardTitle">
+            {{ card.voucher.name }}
+          </mat-card-title>
         </mat-card-header>
-        <br />
-        <img mat-card-image [src]="card.urlImagen" />
+        <br /> -->
+
+        <!-- <img mat-card-image [src]="card.urlImagen" (click)="btnComprar(card)" /> -->
+        <!-- <img class="imgType" *ngIf="card.voucher.type == 'BY_TIME' && card.voucher.price.currency != 'FREE'" mat-card-image src="time.png" (click)="btnComprar(card)" />
+        <img class="imgType" *ngIf="card.voucher.type == 'BY_DATA' && card.voucher.price.currency != 'FREE'" mat-card-image src="data.png" (click)="btnComprar(card)" />
+        <img class="imgType" *ngIf="card.voucher.price.currency == 'FREE'" mat-card-image src="free.png" (click)="btnComprar(card)" />
         <mat-card-content>
-          <br />
-          <p>{{ card.voucher.data.timeUnit }} {{ card.voucher.data.value }}</p>
-          <p>{{card.voucher.price.currency}} {{card.voucher.price.cost}}</p>
-        </mat-card-content>
-        <mat-card-actions>
-          <button mat-button>BUY</button>
-        </mat-card-actions>
-      </mat-card>    
+        <br />
+
+        <table class="tPrice">
+          <tbody>
+            <tr>
+              <td class="pLeft">
+                <span *ngIf="card.voucher.type == 'BY_TIME'" >{{ getData(card.voucher) }}</span>
+                <span *ngIf="card.voucher.type == 'BY_DATA'">{{ getData(card.voucher) }}</span>    
+              </td>
+              <td class="pRight">
+                <img *ngIf="card.voucher.price.currency == 'ARS'" class="costIcon" src="arg.png"> 
+                <img *ngIf="card.voucher.price.currency == 'USD'" class="costIcon" src="usa.png"> 
+                {{ getCost(card.voucher) }}    
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+      </mat-card-content>
+
+      <mat-card-actions>
+        <button class="buyButton" (click)="btnComprar(card)" mat-button>BUY</button>
+      </mat-card-actions>
+    </mat-card>    
+</div> -->
+
+<div class="titleHeader">WIFI Rental</div>
+
+<div class="cards-container">
+  <div *ngFor="let card of voucherCards()" class="{{getClassByType(card)}}" (click)="btnComprar(card)">
+    <p>
+      <img *ngIf="card.voucher.price.currency == 'FREE'" src="free02.png" alt="Free">
+      <img *ngIf="card.voucher.type == 'BY_TIME' && card.voucher.price.currency != 'FREE'" src="time02.png" alt="ByTime">
+      <img *ngIf="card.voucher.type == 'BY_DATA' && card.voucher.price.currency != 'FREE'" src="data02.png" alt="ByData">
+    </p>
+    <h3 class="cardTitle">{{card.voucher.name}}</h3>
+    <p>{{ getCost(card.voucher) }}</p>
+  </div>
 </div>
 
-<!-- <button (click)="btnIngresar()">Ingresar</button> -->
-
+<!-- <div class="cards-container">
+  <div class="card free">    
+    <p><img src="free02.png" alt="Gratis"></p>
+    <h3 class="cardTitle">Gratis</h3>
+    <p>Free</p>
+  </div>
+  <div class="card time">
+    <p><img src="time02.png" alt="Por tiempo"></p>
+    <h3 class="cardTitle">Por tiempo</h3>
+    <p>$5.00/h</p>
+  </div>
+  <div class="card data">
+    <p><img src="data02.png" alt="Por datos"></p>
+    <h3 class="cardTitle">Por datos</h3>
+    <p>$10.00/GB</p>
+  </div>
+</div> -->

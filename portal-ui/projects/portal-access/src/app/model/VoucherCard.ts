@@ -1,6 +1,6 @@
-import { Voucher } from "./Voucher";
+import { Voucher } from "./api/Voucher";
 
 export class VoucherCard {
     public voucher!: Voucher
-    public urlImagen! : string
+    //public urlImagen! : string
 }

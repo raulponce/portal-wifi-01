@@ -5,13 +5,18 @@ import { ModelService } from './model.service';
 @Injectable({
   providedIn: 'root'
 })
-export class InputDataGuard implements CanActivate {
+export class ModelDataGuard implements CanActivate {
 
   constructor(private model : ModelService, private router:Router) {}
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): MaybeAsync<GuardResult> {
-    if (this.model.inputData != null && this.model.inputData.clientMac != null) {
+  canActivate(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot): MaybeAsync<GuardResult> {
+    if (this.model.voucherSelected != null) {
       return true;
+    } else {
+      console.log("Access deny");
+      this.router.navigate(['/wrong']);
     }
     return false;
   }

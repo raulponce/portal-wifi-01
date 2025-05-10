@@ -1,17 +1,98 @@
-.container {
+/* .container {
     padding: 24px;
 }
 
-img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
+.cardTitleHeader {
+    background-color: rgba(150, 225, 150);
+    border-radius: 8px;
+}
+
+
+.mat-mdc-card-title {
+    width: 100% !important;
+}
+
+.imgType {
+    height: 5em;
+    object-fit: contain;
 }
 
 .responsive-grid {
     display: grid;
-    /* grid-template-columns: repeat(4, 1fr); */
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 24px;
 }
+  
+.costIcon {
+    max-width: 16px;
+    max-height: 16px;
+}
+
+.pLeft {
+    text-align: left;
+}
+
+.pRight {
+    text-align: right;
+}
+
+.tPrice {
+    width: 100%;
+}
+
+.buyButton {
+    width: 100%;
+} */
+
+.titleHeader {
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+    font-size: 3em;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.cards-container {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    padding: 24px;
+}
+
+.card {
+    width: 160px;
+    border-radius: 12px;
+    padding: 16px;
+    background: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    font-family: sans-serif;
+}
+
+.card img {
+    width: 96px;
+    height: 96px;
+    margin-bottom: 12px;
+}
+
+.card h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #222;
+}
+
+.cardTitle {
+    font-weight: bolder;
+}
+  
+.card p {
+    margin: 4px 0 0;
+    font-weight: bold;
+    color: #555;
+}
+
+/* Optional background colors */
+.card.free { background-color: #e0f7ff; }
+.card.time { background-color: #fff3c0; }
+.card.data { background-color: #f0e5ff; }
   
