@@ -12,16 +12,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/api/v1/authorization")
 public class Authorization {
 
-    @Autowired
-    private ar.com.auster.wifi.portal_server.omada.api.Authorization omadaApiAuth;
-
-    @RequestMapping(path = "/portal", method = RequestMethod.GET, consumes = {}, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(path = "/access/check", method = RequestMethod.POST, consumes = {}, produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation
-    public ResponseEntity<Void> firstAccess() {
+    public ResponseEntity<Void> checkAccess() {
         return ResponseEntity.ok().build();
     }
 
-    @RequestMapping(path =  "/buy-access", method = RequestMethod.GET, consumes = {}, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(path =  "/access/buy", method = RequestMethod.POST, consumes = {}, produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation
 //    @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<String> buyAccess() {

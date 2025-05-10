@@ -36,6 +36,7 @@
 	</scm>
 	<properties>
 		<java.version>21</java.version>
+		<lombok.version>1.18.38</lombok.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -92,27 +93,33 @@
 			<artifactId>flyway-mysql</artifactId>
 		</dependency>
 
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-docker-compose</artifactId>
-			<scope>runtime</scope>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>io.micrometer</groupId>
-			<artifactId>micrometer-registry-prometheus</artifactId>
-			<scope>runtime</scope>
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.boot</groupId>-->
+<!--			<artifactId>spring-boot-docker-compose</artifactId>-->
+<!--			<scope>runtime</scope>-->
+<!--			<optional>true</optional>-->
+<!--		</dependency>-->
+<!--		<dependency>-->
+<!--			<groupId>io.micrometer</groupId>-->
+<!--			<artifactId>micrometer-registry-prometheus</artifactId>-->
+<!--			<scope>runtime</scope>-->
+<!--		</dependency>-->
 		<dependency>
 			<groupId>org.mariadb.jdbc</groupId>
 			<artifactId>mariadb-java-client</artifactId>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-dbcp2</artifactId>
+			<version>2.13.0</version>
+		</dependency>
+		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>1.18.32</version>
-			<optional>true</optional>
+			<version>${lombok.version}</version>
+<!--			<optional>true</optional>-->
+			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
@@ -148,14 +155,17 @@
 						<path>
 							<groupId>org.projectlombok</groupId>
 							<artifactId>lombok</artifactId>
+							<version>${lombok.version}</version>
 						</path>
 					</annotationProcessorPaths>
+<!--					<compilerArgs>&#45;&#45;enable-preview</compilerArgs>-->
 				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
+					<excludeDockerCompose>true</excludeDockerCompose>
 					<excludes>
 						<exclude>
 							<groupId>org.projectlombok</groupId>
