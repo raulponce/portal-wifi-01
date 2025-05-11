@@ -93,12 +93,12 @@
 			<artifactId>flyway-mysql</artifactId>
 		</dependency>
 
-<!--		<dependency>-->
-<!--			<groupId>org.springframework.boot</groupId>-->
-<!--			<artifactId>spring-boot-docker-compose</artifactId>-->
-<!--			<scope>runtime</scope>-->
-<!--			<optional>true</optional>-->
-<!--		</dependency>-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-docker-compose</artifactId>
+			<scope>runtime</scope>
+			<optional>true</optional>
+		</dependency>
 <!--		<dependency>-->
 <!--			<groupId>io.micrometer</groupId>-->
 <!--			<artifactId>micrometer-registry-prometheus</artifactId>-->
@@ -165,7 +165,6 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-					<excludeDockerCompose>true</excludeDockerCompose>
 					<excludes>
 						<exclude>
 							<groupId>org.projectlombok</groupId>

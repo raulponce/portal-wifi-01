@@ -219,8 +219,10 @@ public class SessionService implements ISessionService, IVoucherService {
     public List<Voucher> getVoucher() {
         List<Voucher> vouchers = new ArrayList<>();
 
+        Voucher v;
         int id = 1;
-        Voucher v = new Voucher();
+
+        v = new Voucher();
         v.setId(id++);
         v.setType(VoucherType.BY_TIME);
         v.setName("1 Minute");
@@ -229,7 +231,7 @@ public class SessionService implements ISessionService, IVoucherService {
         v.setData(new VoucherData<VoucherTimeUnit>(VoucherTimeUnit.MINUTE, 1));
         vouchers.add(v);
 
-        Voucher v = new Voucher();
+        v = new Voucher();
         v.setId(id++);
         v.setType(VoucherType.BY_TIME);
         v.setName("5 Minutes");

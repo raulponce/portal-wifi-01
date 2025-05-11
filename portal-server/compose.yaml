@@ -1,0 +1,13 @@
+
+services:
+  mariadb:
+    container_name: portal-server-db
+    image: 'mariadb:11.4'
+    environment:
+      - 'MARIADB_DATABASE=portal_wifi_audit'
+      - 'MARIADB_ROOT_PASSWORD=auster$321'
+    ports:
+      - '33306:3306'
+    volumes:
+      - ./docker/data:/var/lib/mysql
+      - ./docker/db/init:/docker-entrypoint-initdb.d
