@@ -8,7 +8,7 @@ import lombok.Setter;
 public class Voucher<T> {
 
     @Getter @Setter
-    private int id;
+    private long id;
     @Getter @Setter
     private VoucherType type;
     @Getter @Setter

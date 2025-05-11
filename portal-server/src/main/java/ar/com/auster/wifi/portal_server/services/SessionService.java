@@ -33,6 +33,9 @@ public class SessionService implements ISessionService, IVoucherService {
     private Authorization omadaAuthApi;
 
     @Autowired
+    private IDAOData daoData;
+
+    @Autowired
     private Client omadaClientApi;
 
     @Value("${omada.client.id}")
@@ -218,56 +221,12 @@ public class SessionService implements ISessionService, IVoucherService {
 
     public List<Voucher> getVoucher() {
         List<Voucher> vouchers = new ArrayList<>();
-
-        Voucher v;
-        int id = 1;
-
-        v = new Voucher();
-        v.setId(id++);
-        v.setType(VoucherType.BY_TIME);
-        v.setName("1 Minute");
-        v.setStatus(VoucherStatus.READY);
-        v.setPrice(new VoucherPrice(Currency.FREE, 0));
-        v.setData(new VoucherData<VoucherTimeUnit>(VoucherTimeUnit.MINUTE, 1));
-        vouchers.add(v);
-
-        v = new Voucher();
-        v.setId(id++);
-        v.setType(VoucherType.BY_TIME);
-        v.setName("5 Minutes");
-        v.setStatus(VoucherStatus.READY);
-        v.setPrice(new VoucherPrice(Currency.FREE, 0));
-        v.setData(new VoucherData<VoucherTimeUnit>(VoucherTimeUnit.MINUTE, 5));
-        vouchers.add(v);
-
-        v = new Voucher();
-        v.setId(id++);
-        v.setType(VoucherType.BY_TIME);
-        v.setName("15 Minutes");
-        v.setStatus(VoucherStatus.READY);
-        v.setPrice(new VoucherPrice (Currency.ARS, 10.25));
-        v.setData(new VoucherData<VoucherTimeUnit>(VoucherTimeUnit.MINUTE, 15));
-        vouchers.add(v);
-
-        v = new Voucher();
-        v.setId(id++);
-        v.setType(VoucherType.BY_TIME);
-        v.setName("1 Hour");
-        v.setStatus(VoucherStatus.READY);
-        v.setPrice(new VoucherPrice (Currency.USD, 5.75));
-        v.setData(new VoucherData<VoucherTimeUnit>(VoucherTimeUnit.HOUR, 1));
-        vouchers.add(v);
-
-        v = new Voucher();
-        v.setId(id++);
-        v.setType(VoucherType.BY_DATA);
-        v.setName("100 Megas");
-        v.setStatus(VoucherStatus.READY);
-        v.setPrice(new VoucherPrice (Currency.USD, 5.25));
-        v.setData(new VoucherData<VoucherDataUnit>(VoucherDataUnit.MEGAS, 100));
-        vouchers.add(v);
-
         log.info("Voucher list solicitadas");
+        try {
+            vouchers.addAll(daoData.getVouchers());
+        } catch (Throwable e) {
+            log.error("ERROR", e);
+        }
         return vouchers;
     }
 
