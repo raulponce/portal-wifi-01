@@ -44,27 +44,44 @@
     width: 100%;
 } */
 
+/* .mainContainer {
+    background-color: aqua;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+} */
+
 .titleHeader {
     width: 100%;
     text-align: center;
     font-weight: bold;
     font-size: 3em;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    position: fixed;
+    /* background-color: #f0e5ff; */
+    background-color: ;
+    z-index: 10;
 }
 
 .cards-container {
+    margin-top: 3.5em;
     display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    /* background-color: #fff3c0; */
     gap: 16px;
     justify-content: center;
     padding: 24px;
 }
 
 .card {
+    min-width: 160px;
     width: 160px;
     border-radius: 12px;
     padding: 16px;
     background: #ffffff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 4px 6px 8px rgba(0, 0, 0, 0.2);
     text-align: center;
     font-family: sans-serif;
 }

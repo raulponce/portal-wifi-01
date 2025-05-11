@@ -39,19 +39,21 @@
     </mat-card>    
 </div> -->
 
-<div class="titleHeader">WIFI Rental</div>
+<!-- <div class="mainContainer"> -->
+  <div class="titleHeader">WIFI Rental</div>
 
-<div class="cards-container">
-  <div *ngFor="let card of voucherCards()" class="{{getClassByType(card)}}" (click)="btnComprar(card)">
-    <p>
-      <img *ngIf="card.voucher.price.currency == 'FREE'" src="free02.png" alt="Free">
-      <img *ngIf="card.voucher.type == 'BY_TIME' && card.voucher.price.currency != 'FREE'" src="time02.png" alt="ByTime">
-      <img *ngIf="card.voucher.type == 'BY_DATA' && card.voucher.price.currency != 'FREE'" src="data02.png" alt="ByData">
-    </p>
-    <h3 class="cardTitle">{{card.voucher.name}}</h3>
-    <p>{{ getCost(card.voucher) }}</p>
-  </div>
-</div>
+  <div class="cards-container">
+    <div *ngFor="let card of voucherCards()" class="{{getClassByType(card)}}" (click)="btnComprar(card)">
+      <p>
+        <img *ngIf="card.voucher.price.currency == 'FREE'" src="free02.png" alt="Free">
+        <img *ngIf="card.voucher.type == 'BY_TIME' && card.voucher.price.currency != 'FREE'" src="time02.png" alt="ByTime">
+        <img *ngIf="card.voucher.type == 'BY_DATA' && card.voucher.price.currency != 'FREE'" src="data02.png" alt="ByData">
+      </p>
+      <h3 class="cardTitle">{{card.voucher.name}}</h3>
+      <p>{{ getCost(card.voucher) }}</p>
+    </div>
+  </div>  
+<!-- </div> -->
 
 <!-- <div class="cards-container">
   <div class="card free">    
