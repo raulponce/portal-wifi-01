@@ -81,7 +81,8 @@
           "defaultConfiguration": "development",
           "options": {
             "disableHostCheck": true,
-            "host": "0.0.0.0"
+            "host": "0.0.0.0",
+            "proxyConfig": "projects/proxy.conf.json"
           }
         },
         "extract-i18n": {
@@ -184,7 +185,8 @@
           "defaultConfiguration": "development",
           "options": {
             "disableHostCheck": true,
-            "host": "0.0.0.0"
+            "host": "0.0.0.0",
+            "proxyConfig": "projects/proxy.conf.json"
           }
         },
         "extract-i18n": {
