@@ -10,7 +10,7 @@ import java.time.OffsetDateTime;
 public class ClientVoucher {
 
     @Getter @Setter
-    private int id;
+    private long id;
     @Getter @Setter
     private Client client;
     @Getter @Setter
@@ -39,6 +39,7 @@ public class ClientVoucher {
     @Getter @Setter
     private OffsetDateTime pausedTime;
 
-    private ClientVoucher status;
+    @Getter @Setter
+    private ClientVoucherStatus status;
 
 }

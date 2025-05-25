@@ -2,8 +2,6 @@ package ar.com.auster.wifi.portal_server.services;
 
 import ar.com.auster.wifi.portal_server.api.v1.Vouchers;
 import ar.com.auster.wifi.portal_server.model.*;
-import ar.com.auster.wifi.portal_server.omada.api.Authorization;
-import ar.com.auster.wifi.portal_server.omada.api.Client;
 import ar.com.auster.wifi.portal_server.omada.model.*;
 import ar.com.auster.wifi.portal_server.omada.services.TokenHeaderInterceptor;
 import jakarta.annotation.PostConstruct;
@@ -30,13 +28,13 @@ public class SessionService implements ISessionService, IVoucherService {
     private TokenHeaderInterceptor tokenIntereceptor;
 
     @Autowired
-    private Authorization omadaAuthApi;
+    private ar.com.auster.wifi.portal_server.omada.api.Authorization omadaAuthApi;
 
     @Autowired
     private IDAOData daoData;
 
     @Autowired
-    private Client omadaClientApi;
+    private ar.com.auster.wifi.portal_server.omada.api.Client omadaClientApi;
 
     @Value("${omada.client.id}")
     private String clientId;
@@ -44,6 +42,13 @@ public class SessionService implements ISessionService, IVoucherService {
     private String clientSecret;
     @Value("${omada.omadac.id}")
     private String omadacId;
+
+    @Value("${portal.info.validation.siteId:}")
+    private String siteIdValid;
+    @Value("${portal.info.validation.apMac:}")
+    private String apMacValid;
+    @Value("${portal.info.validation.ssidName:}")
+    private String ssidNameValid;
 
     @Autowired
     private IVoucherByTimeTask voucherByTimeTask;
@@ -214,16 +219,36 @@ public class SessionService implements ISessionService, IVoucherService {
 
     }
 
+
+    public boolean isValid(PortalInfo portalInfo) {
+        if (portalInfo != null) {
+            if (this.siteIdValid != null && !this.siteIdValid.isEmpty() && !this.siteIdValid.equals(portalInfo.site)) {
+                return false;
+            }
+            if (this.apMacValid != null && !this.apMacValid.isEmpty() && !this.apMacValid.equals(portalInfo.apMac)) {
+                return false;
+            }
+            if (this.ssidNameValid != null && !this.ssidNameValid.isEmpty() && !this.ssidNameValid.equals(portalInfo.ssidName)) {
+                return false;
+            }
+            //TODO: Validar estos campos contra el omada controller real, en lugar de usar parametria
+            return true;
+        }
+        return false;
+    }
+
     //IVoucherService
     public List<VoucherType> getVoucherTypes() {
         return Arrays.stream(VoucherType.values()).toList();
     }
 
+    //TODO: quitar
+    @Deprecated
     public List<Voucher> getVoucher() {
         List<Voucher> vouchers = new ArrayList<>();
         log.info("Voucher list solicitadas");
         try {
-            vouchers.addAll(daoData.getVouchers());
+            vouchers.addAll(daoData.getVouchersAvailables());
         } catch (Throwable e) {
             log.error("ERROR", e);
         }
@@ -241,6 +266,29 @@ public class SessionService implements ISessionService, IVoucherService {
             return false;
         }
         try {
+//            {
+//                Client client = new Client();
+//                client.setName("??");
+//                client.setEmail("??");
+//                client.setStatus(ClientStatus.PENDING);
+//                client.setLastVoucher();
+//                client.setLastOperation();
+//
+//                ClientVoucher cVoucher = new ClientVoucher();
+//                cVoucher.setClient(client);
+//
+//                cVoucher.setVoucher(voucher);
+//                cVoucher.setVoucherName(voucher.getName());
+//                cVoucher.setVoucherTyope(voucher.getType());
+//                cVoucher.setPrice(voucher.getPrice());
+//
+//                cVoucher.setDeviceIp(omadaQParam.clientIp);
+//                cVoucher.setMac(omadaQParam.clientMac);
+//
+//                cVoucher.setStartedTime(null);
+//                cVoucher.setExpiredTime(null);
+//                cVoucher.setPausedTime(null);
+//            }
             Call<CommonResponse<Void>> callAuthReq = omadaClientApi.authorize(this.omadacId, omadaQParam.site, omadaQParam.clientMac);
             Response<CommonResponse<Void>> respAuthReq = callAuthReq.execute();
             if (respAuthReq != null && respAuthReq.isSuccessful()) {

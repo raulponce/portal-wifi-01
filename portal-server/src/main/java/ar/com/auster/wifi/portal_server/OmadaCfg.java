@@ -2,6 +2,8 @@ package ar.com.auster.wifi.portal_server;
 
 import ar.com.auster.wifi.portal_server.omada.api.Authorization;
 import ar.com.auster.wifi.portal_server.omada.api.Client;
+import ar.com.auster.wifi.portal_server.omada.mock.AuthorizationMock;
+import ar.com.auster.wifi.portal_server.omada.mock.ClientMock;
 import ar.com.auster.wifi.portal_server.omada.services.TokenHeaderInterceptor;
 import okhttp3.OkHttpClient;
 import org.springframework.beans.factory.annotation.Value;
@@ -43,8 +45,6 @@ public class OmadaCfg {
             final SSLSocketFactory sslSocketFactory = sslContext.getSocketFactory();
 
             OkHttpClient.Builder builder = new OkHttpClient.Builder();
-//            builder.sslSocketFactory(sslSocketFactory);
-//            builder.sslSocketFactory(sslSocketFactory, new JEEX509TrustManager());
             builder.sslSocketFactory(sslSocketFactory, (X509TrustManager)trustAllCerts[0]);
             builder.hostnameVerifier(new HostnameVerifier() {
                 @Override
@@ -53,8 +53,6 @@ public class OmadaCfg {
                 }
             });
 
-            //OkHttpClient okHttpClient = builder.build();
-            //return okHttpClient;
             return builder;
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -62,33 +60,41 @@ public class OmadaCfg {
     }
 
     @Bean
-    public Authorization buildOmadaAPIAuthorization(@Value("${omada.api.urlBase}") String urlBase) {
-        //OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
-        OkHttpClient.Builder httpClient = getUnsafeOkHttpClient();
+    public Authorization buildOmadaAPIAuthorization(@Value("${omada.api.urlBase}") String urlBase, @Value("${omada.api.mock.enable:false}")boolean useMock) {
+        Authorization api = null;
+        if (useMock) {
+            api = new AuthorizationMock();
+        } else {
+            OkHttpClient.Builder httpClient = getUnsafeOkHttpClient();
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(urlBase)
-                .addConverterFactory(JacksonConverterFactory.create())
-                .client(httpClient.build())
-                .build();
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(urlBase)
+                    .addConverterFactory(JacksonConverterFactory.create())
+                    .client(httpClient.build())
+                    .build();
 
-        Authorization api = retrofit.create(Authorization.class);
+            api = retrofit.create(Authorization.class);
+        }
         return api;
     }
 
     @Bean
-    public Client buildOmadaAPIClient(@Value("${omada.api.urlBase}") String urlBase, TokenHeaderInterceptor authInterceptor) {
-//        OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
-        OkHttpClient.Builder httpClient = getUnsafeOkHttpClient();
-        httpClient.addInterceptor(authInterceptor);
+    public Client buildOmadaAPIClient(@Value("${omada.api.urlBase}") String urlBase, TokenHeaderInterceptor authInterceptor, @Value("${omada.api.mock.enable:false}")boolean useMock) {
+        Client api = null;
+        if (useMock) {
+            api = new ClientMock();
+        } else {
+            OkHttpClient.Builder httpClient = getUnsafeOkHttpClient();
+            httpClient.addInterceptor(authInterceptor);
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(urlBase)
-                .addConverterFactory(JacksonConverterFactory.create())
-                .client(httpClient.build())
-                .build();
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(urlBase)
+                    .addConverterFactory(JacksonConverterFactory.create())
+                    .client(httpClient.build())
+                    .build();
 
-        Client api = retrofit.create(Client.class);
+            api = retrofit.create(Client.class);
+        }
         return api;
     }
 

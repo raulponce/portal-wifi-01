@@ -4,25 +4,22 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.OffsetDateTime;
-
 @NoArgsConstructor
-public class Client {
-
+public class PortalInfo {
     @Getter @Setter
-    private Long id;
+    public String clientMac;
     @Getter @Setter
-    private String name;
+    public String clientIp;
     @Getter @Setter
-    private String email;
+    public long t;
     @Getter @Setter
-    private ClientStatus status;
-
+    public String site; //validar
     @Getter @Setter
-    private OffsetDateTime creationTime;
+    public String redirectUrl;
     @Getter @Setter
-    private OffsetDateTime lastOperation;
-
+    public String apMac; //validar
     @Getter @Setter
-    private Voucher lastVoucher;
+    public String ssidName; //Validar
+    @Getter @Setter
+    public int radioId;
 }

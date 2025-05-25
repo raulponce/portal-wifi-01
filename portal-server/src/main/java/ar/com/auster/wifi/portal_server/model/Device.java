@@ -17,14 +17,18 @@ public class Device {
     private String mac;
 
     @Getter @Setter
-    private ClientStatus status;
+    private DeviceStatus status;
 
     @Getter @Setter
-    private OffsetDateTime startedTime;
-    @Getter @Setter
-    private OffsetDateTime expiredTime;
+    private OffsetDateTime lastOperation;
 
-    @Getter @Setter
-    private Voucher lastVoucher;
+
+//    @Getter @Setter
+//    private OffsetDateTime startedTime;
+//    @Getter @Setter
+//    private OffsetDateTime expiredTime;
+
+//    @Getter @Setter
+//    private Voucher lastVoucher;
 
 }

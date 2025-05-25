@@ -10,14 +10,14 @@ import java.util.Map;
 
 public class VoucherMapper implements RowMapper<Voucher<?>> {
 
-    public static String COL_ID = "ID";
-    public static String COL_NAME = "NAME";
-    public static String COL_TYPE = "TYPE";
-    public static String COL_STATUS = "STATUS";
-    public static String COL_CURRENCY = "CURRENCY";
-    public static String COL_PRICE = "PRICE";
-    public static String COL_DATA_ENUM = "DATA_ENUM";
-    public static String COL_DATA_UNIT = "DATA_UNIT";
+    public static final String COL_ID = "ID";
+    public static final String COL_NAME = "NAME";
+    public static final String COL_TYPE = "TYPE";
+    public static final String COL_STATUS = "STATUS";
+    public static final String COL_CURRENCY = "CURRENCY";
+    public static final String COL_PRICE = "PRICE";
+    public static final String COL_DATA_ENUM = "DATA_ENUM";
+    public static final String COL_DATA_UNIT = "DATA_UNIT";
 
     public static Voucher<?> buildObject(Map<String, Object> mapItem) {
         String typeStr =  (String)mapItem.get(COL_TYPE);
@@ -105,7 +105,7 @@ public class VoucherMapper implements RowMapper<Voucher<?>> {
             result = new Voucher<VoucherData>();
         }
         if (result != null) {
-            result.setId(rs.getInt(COL_ID));
+            result.setId(rs.getLong(COL_ID));
             result.setName(rs.getString(COL_NAME));
             result.setType(type);
 

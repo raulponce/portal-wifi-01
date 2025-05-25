@@ -19,19 +19,9 @@ export enum VoucherTimeUnit {
     MINUTE='MINUTE', HOUR='HOUR', DAY='DAY'
 }
 
-// export class VoucherByTimeData {
-//     public timeUnit! : VoucherTimeUnit
-//     public value!: number
-// }
-
 export enum VoucherDataUnit {
     MEGAS='MEGAS', GIGAS='GIGAS'
 }
-
-// export class VoucherByDataData {
-//     public dataUnit! : VoucherDataUnit
-//     public value!: number
-// }
 
 export class VoucherData {
     public unit! : VoucherTimeUnit|VoucherDataUnit
