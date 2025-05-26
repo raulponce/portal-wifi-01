@@ -39,4 +39,9 @@ Por ejemplo si estamos parados en la carpeta donde tenemos el código de la ui *
 
 Y copiar todo el contenido de la ui compilada mediante
 
-| cp -rfp ./dist/portal-access/* ../portal-server/src/main/resources/static/
+| cp -rfp ./dist/portal-access/browser/* ../portal-server/src/main/resources/static/
+
+Para validar que esta ok, se lo siguiente es levantar el backend.
+E ingresar a su url (asumiendo que si ip es 192.168.1.13 y el puerto donde se levanta es el 18080):
+
+| http://192.168.1.13:18080/?clientMac=B4-6B-FC-D2-7C-5B&clientIp=192.168.1.16&t=1742766560&site=67d41b41fa1be0473141c355&redirectUrl=http:%2F%2Fwww.msftconnecttest.com%2Fredirect&apMac=50-91-E3-FF-6F-E2&ssidName=auster_wifi&radioId=0
