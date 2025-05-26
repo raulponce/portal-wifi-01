@@ -5,6 +5,7 @@ import ar.com.auster.wifi.portal_server.omada.model.ClientGridVOClientInfo;
 import ar.com.auster.wifi.portal_server.omada.model.ClientInfo;
 import ar.com.auster.wifi.portal_server.omada.model.CommonResponse;
 import retrofit2.Call;
+import retrofit2.Response;
 import retrofit2.mock.BehaviorDelegate;
 import retrofit2.mock.Calls;
 
@@ -27,7 +28,7 @@ public class ClientMock implements Client {
         CommonResponse<Void> result = new CommonResponse<Void>();
         result.setErrorCode(0);
         result.setMsg(null);
-        return Calls.response(result);
+        return Calls.response(Response.success(result));
     }
 
     @Override
@@ -35,7 +36,7 @@ public class ClientMock implements Client {
         CommonResponse<Void> result = new CommonResponse<Void>();
         result.setErrorCode(0);
         result.setMsg(null);
-        return Calls.response(result);
+        return Calls.response(Response.success(result));
     }
 
     @Override
