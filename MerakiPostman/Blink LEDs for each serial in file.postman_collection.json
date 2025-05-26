@@ -1,0 +1,144 @@
+{
+	"info": {
+		"_postman_id": "bc58b45e-7523-4922-88d1-a5eebce7735f",
+		"name": "Blink LEDs for each serial in file",
+		"description": "This will run the desired API for each network, binding it to the config template. \n\n\n\"Run\" the collection.\n\n\n\nUpload a csv file with two columns and a row for each `networkId` and its desired `configTemplateId` or a JSON file with an array with the those params for each network.\n\n*example-file.csv*\n\n```\nnetworkId,configTemplateId\nL_6434517960000001,N_111111111\nL_6434517960000002,N_111111111\nL_6434517960000003,N_111111111\nL_6434517960000004,N_222222222\nL_6434517960000004,N_222222222\n```\n\n- Set the Delay to about 250ms\n- Log the results\n\nRun the Collection!",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "10584098",
+		"_collection_link": "https://www.postman.com/meraki-api/cisco-meraki-s-public-workspace/collection/gt5codu/blink-leds-for-each-serial-in-file?action=share&source=collection_link&creator=10584098"
+	},
+	"item": [
+		{
+			"name": "Blink The LEDs On A Device",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 202\", function () {",
+							"    pm.response.to.have.status(202);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"followAuthorizationHeader": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"duration\": \"5\"\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/devices/:serial/blinkLeds",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"devices",
+						":serial",
+						"blinkLeds"
+					],
+					"variable": [
+						{
+							"key": "serial",
+							"value": "{{serial}}",
+							"description": "(Required) "
+						}
+					]
+				},
+				"description": "Blink the LEDs on a device\n #### Body Parameters \n**Parameter**|**Type**|**Description** \n :-------------: |:-------------: |:-------------: \nduration| integer| The duration in seconds. Must be between 5 and 120. Default is 20 seconds\nperiod| integer| The period in milliseconds. Must be between 100 and 1000. Default is 160 milliseconds\nduty| integer| The duty cycle as the percent active. Must be between 10 and 90. Default is 50.\n"
+			},
+			"response": [
+				{
+					"name": "Successful operation",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"duration\": 20,\n    \"period\": 160,\n    \"duty\": 50\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/devices/:serial/blinkLeds",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"devices",
+								":serial",
+								"blinkLeds"
+							],
+							"variable": [
+								{
+									"key": "serial"
+								}
+							]
+						}
+					},
+					"status": "Accepted",
+					"code": 202,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n \"duration\": 20,\n \"period\": 160,\n \"duty\": 50\n}"
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "value",
+				"value": "Bearer {{apiKey}}",
+				"type": "string"
+			},
+			{
+				"key": "key",
+				"value": "Authorization",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://api.meraki.com/api/v1"
+		}
+	]
+}
