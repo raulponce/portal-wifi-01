@@ -1,59 +1,42 @@
-# PortalUi
+## Run Develop
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.4.
+# Portal de Acceso:
 
-## Development server
+Levantar la interfaz de angular con:
 
-To start a local development server, run:
+| ng serve portal-access
 
-```bash
-ng serve
-```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Para acceder desde el navegador la url es:
 
-## Code scaffolding
+| http://localhost:4200
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+No obstante para acceder como lo redirige el OmadaController la URL debe ser de la forma:
 
-```bash
-ng generate component component-name
-```
+| http://localhost:4200/?clientMac=B4-6B-FC-D2-7C-5B&clientIp=192.168.1.16&t=1742766560&site=67d41b41fa1be0473141c355&redirectUrl=http%3A%2F%2Fwww.msftconnecttest.com%2Fredirect&apMac=50-91-E3-FF-6F-E2&ssidName=auster_wifi&radioId=0
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+En caso de querer ingresar desde un telefono o desde una pc externa es necesario hacerun port-forward a la ip de la LAN
+Por ejemplo asumiendo que estas en linux, y se tiene la herramienta **socat** instalada se debe ejecutar en una terminal (en el sistema, no en la terminal dentro del VSCode dado que se ejecuta dentro del entorno dockerizado).
 
-```bash
-ng generate --help
-```
+| socat TCP-LISTEN:14200,fork,reuseaddr TCP4:localhost:4200
 
-## Building
+Esto disponibiliza en todas las ip de la maquina en el puerto 14200 una redireccion al puerto 4200 de localhost. Que el VSCode ya hizo una redireccion de ese puerto al puerto 4200 de la imagen de docker donde esta corriendo la aplicacion de angular levantada con ng serve.
 
-To build the project run:
+Y por ejemplo si la ip del host, dentro de la red local es **192.168.1.13** se puede acceder con la URL:
 
-```bash
-ng build
-```
+| http://192.168.1.13:14200/?clientMac=B4-6B-FC-D2-7C-5B&clientIp=192.168.1.16&t=1742766560&site=67d41b41fa1be0473141c355&redirectUrl=http%3A%2F%2Fwww.msftconnecttest.com%2Fredirect&apMac=50-91-E3-FF-6F-E2&ssidName=auster_wifi&radioId=0
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+# Compilar una version estatica para pasar al backend
 
-## Running unit tests
+Dentro de la terminal de VSCode, hacer un build con el comando:
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+| ng build --configuration=production portal-access
 
-```bash
-ng test
-```
+Luego, desde una terminal del sistema (no la de VSCode) borrar el contenido de la carpeta ***portal-server/src/main/resources/static/*** del código del backend.
+Por ejemplo si estamos parados en la carpeta donde tenemos el código de la ui ***portla-ui*** seria:
 
-## Running end-to-end tests
+| rm -rf ../portal-server/src/main/resources/static/*
 
-For end-to-end (e2e) testing, run:
+Y copiar todo el contenido de la ui compilada mediante
 
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+| cp -rfp ./dist/portal-access/* ../portal-server/src/main/resources/static/
