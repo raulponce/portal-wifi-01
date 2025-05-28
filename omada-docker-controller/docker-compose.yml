@@ -6,7 +6,7 @@ services:
     hostname: omada-controller
     #image: auster/omada-controller:5.15
     #image: auster/omada-controller:5.14
-    image: ghcr.io/danieldaf/omada-controller:5.14
+    image: ghcr.io/danieldaf/omada-controller:5.15
     restart: unless-stopped
     ulimits:
       nofile:
