@@ -8,8 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-@Controller
-@RequestMapping("/api/v1/authorization")
+//@Controller
+//@RequestMapping("/api/v1/authorization")
 public class Authorization {
 
     @RequestMapping(path = "/access/check", method = RequestMethod.POST, consumes = {}, produces = MediaType.APPLICATION_JSON_VALUE)

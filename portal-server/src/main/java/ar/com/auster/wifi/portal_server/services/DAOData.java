@@ -1,38 +1,29 @@
 package ar.com.auster.wifi.portal_server.services;
 
-import ar.com.auster.wifi.portal_server.mapper.ClientMapper;
-import ar.com.auster.wifi.portal_server.mapper.ClientVoucherMapper;
-import ar.com.auster.wifi.portal_server.mapper.DeviceMapper;
-import ar.com.auster.wifi.portal_server.mapper.VoucherMapper;
+import ar.com.auster.wifi.portal_server.mapper.*;
 import ar.com.auster.wifi.portal_server.model.Client;
 import ar.com.auster.wifi.portal_server.model.ClientVoucher;
 import ar.com.auster.wifi.portal_server.model.Device;
 import ar.com.auster.wifi.portal_server.model.Voucher;
-import jakarta.annotation.PostConstruct;
 import jakarta.annotation.Resource;
 import org.slf4j.Logger;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.sql.DataSource;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 @Repository
+@Transactional(value = "DataTx", isolation = Isolation.READ_UNCOMMITTED)
 public class DAOData implements IDAOData {
 
     private static Logger log = org.slf4j.LoggerFactory.getLogger(DAOData.class);
 
-    @Resource(name = "DataDB")
-    private DataSource dbData;
-
+    @Resource(name = "DataJdbc")
     private JdbcTemplate jdbcApi;
-
-    @PostConstruct
-    private void onInit() {
-        jdbcApi = new JdbcTemplate(dbData);
-    }
 
     @Override
     public List<Voucher> getVouchersAvailables() {
@@ -85,8 +76,8 @@ public class DAOData implements IDAOData {
     }
 
     @Override
-    public Voucher<?> getVoucherById(Long id) {
-        Voucher<?> result = null;
+    public Voucher getVoucherById(Long id) {
+        Voucher result = null;
         if (id != null) {
             final String sql = "SELECT * FROM VOUCHERS WHERE ID = ? LIMIT 1";
             Map<String, Object> mapItem = jdbcApi.queryForMap(sql, new Object[] {id});

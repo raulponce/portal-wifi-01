@@ -4,8 +4,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.OffsetDateTime;
+
 @NoArgsConstructor
-public class Voucher<T> {
+public class Voucher {
 
     @Getter @Setter
     private Long id;
@@ -18,6 +20,14 @@ public class Voucher<T> {
     @Getter @Setter
     private VoucherPrice price;
     @Getter @Setter
-    private VoucherData<T> data;
+    private VoucherUnit unit;
+    @Getter @Setter
+    private Integer dataInt;
 
+    @Getter @Setter
+    private OffsetDateTime creationTime;
+    @Getter @Setter
+    private OffsetDateTime modificationTime;
+    @Getter @Setter
+    private OffsetDateTime deletionTime;
 }

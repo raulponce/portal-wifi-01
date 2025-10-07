@@ -10,16 +10,28 @@ export class InputQdataGuard implements CanActivate {
   constructor(private router:Router) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): MaybeAsync<GuardResult> {
-    let mac: string|null = route.queryParamMap.get('clientMac')
-    let clientIp: string|null = route.queryParamMap.get('clientIp')
-    let site: string|null = route.queryParamMap.get('site')
-    let redirectUrl: string|null = route.queryParamMap.get('redirectUrl')
-    let ssidName: string|null = route.queryParamMap.get('ssidName')
-    let radioId: string|null = route.queryParamMap.get('radioId')
+    let tplinkOmada_mac: string|null = route.queryParamMap.get('clientMac')
+    let tplinkOmada_clientIp: string|null = route.queryParamMap.get('clientIp')
+    let tplinkOmada_site: string|null = route.queryParamMap.get('site')
+    // let tplinkOmada_redirectUrl: string|null = route.queryParamMap.get('redirectUrl')
+    let tplinkOmada_ssidName: string|null = route.queryParamMap.get('ssidName')
+    // let tplinkOmada_radioId: string|null = route.queryParamMap.get('radioId')
+
+    // let ciscoMeraki_baseGrantUrl: string|null = route.queryParamMap.get('base_grant_url')
+    // let ciscoMeraki_userContinueUrl: string|null = route.queryParamMap.get('user_continue_url')
+    // let ciscoMeraki_nodeId: string|null = route.queryParamMap.get('node_id')
+    // let ciscoMeraki_nodeMac: string|null = route.queryParamMap.get('node_mac')
+    // let ciscoMeraki_gatewayId: string|null = route.queryParamMap.get('gateway_id')
+    let ciscoMeraki_mac: string|null = route.queryParamMap.get('client_mac')
+    let ciscoMeraki_clientIp: string|null = route.queryParamMap.get('client_ip')
+
     
-    if (mac != null && clientIp != null && site != null && redirectUrl != null && ssidName != null) {
-      console.log("Access valid");      
-      return true
+    if (ciscoMeraki_mac != null && ciscoMeraki_clientIp != null) { 
+      console.log("Access valid Cisco Meraki ["+ciscoMeraki_mac+"] ["+ciscoMeraki_clientIp+"]");      
+      return true        
+    } else if (tplinkOmada_mac != null && tplinkOmada_clientIp != null && tplinkOmada_site != null && tplinkOmada_ssidName != null) { 
+      console.log("Access valid TPLink Omada ["+tplinkOmada_mac+"] ["+tplinkOmada_clientIp+"] ["+tplinkOmada_site+"] ["+tplinkOmada_ssidName+"]");      
+      return true        
     } else {
       console.log("Access deny");
       this.router.navigate(['/wrong']);

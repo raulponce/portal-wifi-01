@@ -1,6 +1,8 @@
 package ar.com.auster.wifi.portal_server.services;
 
+import ar.com.auster.wifi.portal_server.mapper.Tests;
 import ar.com.auster.wifi.portal_server.model.*;
+import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,28 @@ public class PortalService implements IPortalService {
 
     @Autowired
     private IDAOData daoData;
+
+
+//    @Autowired
+//    private Tests tests;
+
+//    @PostConstruct
+//    private void onInit() {
+//        if (tests != null) {
+//            new Thread(() -> {
+//                synchronized (this) {
+//                    try {
+//                        Thread.sleep(1000);
+//                    } catch (InterruptedException e) {
+//                        throw new RuntimeException(e);
+//                    }
+//                }
+//                if (tests != null) {
+//                    tests.testVoucherMapper();
+//                }
+//            }).start();
+//        }
+//    }
 
     @Override
     public SessionInfo newDeviceAccess(PortalInfo portalinfo, Device device) {
@@ -90,7 +114,7 @@ public class PortalService implements IPortalService {
         Device deviceDB = daoData.getDeviceByMac(device.getMac());
 
         // 3.- Validar Voucher
-        Voucher<?> voucherDB = daoData.getVoucherById(voucher.getId());
+        Voucher voucherDB = daoData.getVoucherById(voucher.getId());
 
         // 4.- Validar y asentar Asentar cliente
         Client clientDB = daoData.getClienById(client.getId());
@@ -111,7 +135,7 @@ public class PortalService implements IPortalService {
         Device deviceDB = daoData.getDeviceByMac(device.getMac());
 
         // 3.- Validar compra voucher
-        Voucher<?> voucherDB = daoData.getVoucherById(voucher.getId());
+        Voucher voucherDB = daoData.getVoucherById(voucher.getId());
 
         // 4.- Validar clientes
         Client clientDB = daoData.getClienById(client.getId());

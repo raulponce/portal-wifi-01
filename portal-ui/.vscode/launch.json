@@ -4,11 +4,11 @@
   "configurations": [
 
     {
-      "name": "ng serve portal-access",
+      "name": "portal-access Omada",
       "type": "chrome",
       "request": "launch",
       "preLaunchTask": "npm: start",
-      "url": "http://localhost:4200/"
+      "url": "http://localhost:4200/?clientMac=B4-6B-FC-D2-7C-5B&clientIp=192.168.1.16&t=1742766560&site=67d41b41fa1be0473141c355&redirectUrl=http%3A%2F%2Fwww.msftconnecttest.com%2Fredirect&apMac=50-91-E3-FF-6F-E2&ssidName=auster_wifi&radioId=0"
     },
     {
       "name": "ng test",

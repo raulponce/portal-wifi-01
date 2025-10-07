@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/api/v1/portal")
-@CrossOrigin("*")
+//@RestController
+//@RequestMapping("/api/v1/portal")
+//@CrossOrigin("*")
 public class Portal {
 
     @Autowired

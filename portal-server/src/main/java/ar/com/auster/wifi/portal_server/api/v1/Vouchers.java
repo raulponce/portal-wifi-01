@@ -30,15 +30,28 @@ public class Vouchers {
         return voucherService.getVoucher();
     }
 
+    public static enum OmadaQParamType {
+        EMPTY, TPLINK_OMADA, CISCO_MERAKI
+    }
+
     public static class OmadaQParam {
-        public String clientMac;
-        public String clientIp;
-        public long t;
+        public OmadaQParamType type;
+
+        public Long t;
         public String site;
-        public String redirectUrl;
         public String apMac;
         public String ssidName;
-        public int radioId;
+        public Integer radioId;
+
+        public String baseGrantUrl;
+        public Long nodeId;
+        public String nodeMac;
+        public Long gatewayId;
+
+        public String clientMac;
+        public String clientMacNormalizado;
+        public String clientIp;
+        public String redirectUrl;
     }
 
     public static class BuyVoucherInput {

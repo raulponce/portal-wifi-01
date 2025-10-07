@@ -17,7 +17,7 @@ public interface IDAOData {
 
     boolean addNewDevice(Device device);
 
-    Voucher<?> getVoucherById(Long id);
+    Voucher getVoucherById(Long id);
 
     Client getClienById(Long id);
 }

@@ -1,7 +1,7 @@
 import { Component, signal } from '@angular/core';
 import { ModelService } from '../../model.service';
 import { ActivatedRoute, Route, Router } from '@angular/router';
-import { InputQParams } from '../../model/InputQParams';
+import { InputQParams, QParamsType } from '../../model/InputQParams';
 // import { VoucherComponent } from "../../components/voucher/voucher.component";
 import { VoucherCard } from '../../model/VoucherCard';
 import { Voucher, VoucherDataUnit, VoucherPriceCurrency, VoucherStatus, VoucherTimeUnit, VoucherType } from '../../model/api/Voucher';
@@ -31,11 +31,15 @@ export class VouchersComponent {
   ngOnInit() {
     this.activatedRoute.data.subscribe( ({qparam}) => {
       this.inputData = qparam
-      if (this.inputData.clientMac != null) {
+      if (this.inputData.type != QParamsType.EMPTY) {
         this.model.inputData = this.inputData;
+        console.log("New access")
       } else {
         this.inputData = this.model.inputData;
+        console.log("Reusing access")
       }
+      console.log("Data Access:")
+      console.log(this.inputData)
     })
   }
 

@@ -3,7 +3,7 @@ package ar.com.auster.wifi.portal_server.services;
 import ar.com.auster.wifi.portal_server.api.v1.Vouchers;
 import ar.com.auster.wifi.portal_server.model.ClientVoucherStatus;
 import ar.com.auster.wifi.portal_server.model.Voucher;
-import ar.com.auster.wifi.portal_server.model.VoucherTimeUnit;
+import ar.com.auster.wifi.portal_server.model.VoucherUnit;
 import ar.com.auster.wifi.portal_server.model.VoucherType;
 import lombok.Getter;
 import org.slf4j.Logger;
@@ -39,7 +39,7 @@ public class VoucherByTimeTask implements Runnable, IVoucherByTimeTask {
         this.sessionService = service;
     }
 
-    public void add(Vouchers.OmadaQParam qparam, Voucher<VoucherTimeUnit> voucher) {
+    public void add(Vouchers.OmadaQParam qparam, Voucher voucher) {
         if (voucher.getType() != VoucherType.BY_TIME)
             return;
         ClientVoucher item = new ClientVoucher();
@@ -48,13 +48,15 @@ public class VoucherByTimeTask implements Runnable, IVoucherByTimeTask {
         item.startTime = OffsetDateTime.now();
         item.endTime = item.startTime;
 
-        if (voucher.getData() != null) {
-            if (VoucherTimeUnit.MINUTE.name().equals(voucher.getData().getUnit())) {
-                item.endTime = item.startTime.plusMinutes(voucher.getData().getValue());
-            } else if (VoucherTimeUnit.HOUR.name().equals(voucher.getData().getUnit())) {
-                item.endTime = item.startTime.plusHours(voucher.getData().getValue());
-            } else if (VoucherTimeUnit.DAY.name().equals(voucher.getData().getUnit()))  {
-                item.endTime = item.startTime.plusDays(voucher.getData().getValue());
+        if (voucher.getDataInt() != null) {
+            //VoucherUnit.MINUTE = voucher.getUnit()
+            VoucherUnit vu = voucher.getUnit();
+            if (VoucherUnit.MINUTE.name().equals(voucher.getUnit().name())) {
+                item.endTime = item.startTime.plusMinutes(voucher.getDataInt());
+            } else if (VoucherUnit.HOUR.name().equals(voucher.getUnit().name())) {
+                item.endTime = item.startTime.plusHours(voucher.getDataInt());
+            } else if (VoucherUnit.DAY.name().equals(voucher.getUnit().name()))  {
+                item.endTime = item.startTime.plusDays(voucher.getDataInt());
             }
         }
         synchronized (listClients) {
