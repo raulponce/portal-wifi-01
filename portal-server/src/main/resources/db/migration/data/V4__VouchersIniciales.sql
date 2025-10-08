@@ -1,0 +1,15 @@
+insert into VOUCHERS (NAME, TYPE, STATUS, CURRENCY, PRICE, UNIT, DATA_INT)
+values ('1 Minute', 'BY_TIME', 'READY', 'FREE', 0, 'MINUTE', 1);
+
+insert into VOUCHERS (NAME, TYPE, STATUS, CURRENCY, PRICE, UNIT, DATA_INT)
+values ('5 Minute', 'BY_TIME', 'READY', 'FREE', 0, 'MINUTE', 5);
+
+insert into VOUCHERS (NAME, TYPE, STATUS, CURRENCY, PRICE, UNIT, DATA_INT)
+values ('15 Minutes', 'BY_TIME', 'READY', 'ARS', 150, 'MINUTE', 15);
+
+insert into VOUCHERS (NAME, TYPE, STATUS, CURRENCY, PRICE, UNIT, DATA_INT)
+values ('1 Hour', 'BY_TIME', 'READY', 'USD', 10.5, 'HOUR', 1);
+
+insert into VOUCHERS (NAME, TYPE, STATUS, CURRENCY, PRICE, UNIT, DATA_INT)
+values ('100 Megas', 'BY_DATA', 'READY', 'USD', 20, 'MEGAS', 100);
+
