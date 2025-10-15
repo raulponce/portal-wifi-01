@@ -138,11 +138,11 @@
 			<version>2.11.0</version>
 		</dependency>
 
-		<dependency>
+		<!--dependency>
 			<groupId>cisco.meraki</groupId>
 			<artifactId>meraki-api</artifactId>
 			<version>1.0</version>
-		</dependency>
+		</dependency-->
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

@@ -1,21 +1,21 @@
 package ar.com.auster.wifi.portal_server.meraki.api;
 
-import ar.com.auster.meraki.v1.ApiClient;
-import ar.com.auster.meraki.v1.ApiException;
-import ar.com.auster.meraki.v1.api.OrganizationsApi;
-import com.squareup.okhttp.Call;
-import com.squareup.okhttp.Response;
+//import ar.com.auster.meraki.v1.ApiClient;
+//import ar.com.auster.meraki.v1.ApiException;
+//import ar.com.auster.meraki.v1.api.OrganizationsApi;
+//import com.squareup.okhttp.Call;
+//import com.squareup.okhttp.Response;
 import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 
-@Service
+//@Service
 public class ClientImpl /*implements Client*/ {
 
     private static Logger log = org.slf4j.LoggerFactory.getLogger(ClientImpl.class);
-
+/*
     private ApiClient apiClient;
     private OrganizationsApi organizationsApi;
 
@@ -44,5 +44,5 @@ public class ClientImpl /*implements Client*/ {
             log.error("ERROR", e);
         }
         return null;
-    }
-}
+    } */
+} 
